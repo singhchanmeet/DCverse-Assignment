@@ -19,7 +19,13 @@ const Dashboard = () => {
       let response, data;
       
       if (source === 'reqres') {
-        response = await fetch('https://reqres.in/api/users?page=1');
+        const response = await fetch('https://reqres.in/api/users?page=1', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': 'reqres-free-v1'
+            }
+        });
         data = await response.json();
         setAvatars(data.data.slice(0, 3)); // Only get first 3 avatars
       } else {
@@ -39,7 +45,7 @@ const Dashboard = () => {
     fetchAvatars(apiSource);
   }, [apiSource]);
 
-  const username = "Alex"; // Placeholder username
+  const username = "John Doe"; // Placeholder username
 
   const handleCreateAvatar = () => {
     setCurrentAvatar(null);
